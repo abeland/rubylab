@@ -1,6 +1,22 @@
 RSpec.describe Dijkstra do
   include Dijkstra::ShortestPath
 
+  context 'minimum bottlenack' do
+    it 'should be calculated correctly' do
+      g = Graph::Directed.new
+      g.add_edge('s', 'a', 75)
+      g.add_edge('a', 'b', 30)
+      g.add_edge('s', 'b', 150)
+      g.add_edge('a', 't', 100)
+      g.add_edge('b', 't', 1)
+      a = minimum_bottleneck(g, 's')
+      expect(a['s']).to eq(0)
+      expect(a['a']).to eq(75)
+      expect(a['b']).to eq(75)
+      expect(a['t']).to eq(75)
+    end
+  end
+
   context 'shortest path' do
     it 'should be calculated correctly' do
       g = Graph::Directed.new

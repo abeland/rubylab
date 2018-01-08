@@ -52,5 +52,41 @@ module Dijkstra
 
       aa
     end
+
+    def minimum_bottleneck(graph, source)
+      vv = Set.new(graph.nodes)
+
+      xx = Set.new([])
+      yy = vv - xx
+
+      aa = ActiveSupport::HashWithIndifferentAccess.new
+
+      h = Heap.new
+      h.add(0, source)
+
+      while xx.size != vv.size
+        metric, u = h.extract_min
+        aa[u] = metric
+
+        xx.add(u)
+        yy.delete(u)
+
+        graph.outgoing_edges(u).each do |e|
+          v,c = e
+          next unless yy.include?(v) # Head is in X.
+
+          # 1. Delete v from heap.
+          k,_ = h.delete(v)
+
+          # 2. Update metric.
+          metric = k.nil? ? [aa[u], c].max : [[aa[u], c].max, k].min
+
+          # 3. (Re-)insert v into heap.
+          h.add(metric, v)
+        end
+      end
+
+      aa
+    end
   end
 end
