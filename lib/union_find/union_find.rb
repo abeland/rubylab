@@ -19,7 +19,7 @@ class UnionFind
     if y_rank > x_rank
       items[x_root] = y_root
       sizes[y_root] += sizes[x_root]
-    else # x_ranks >= y_rank
+    else # x_rank >= y_rank
       items[y_root] = x_root
       sizes[x_root] += sizes[y_root]
     end
@@ -28,8 +28,7 @@ class UnionFind
   def find(x)
     curr = x
     while curr != items[curr]
-      # Compress to be a child of the root, and
-      # do that to all nodes in this branch.
+      # Compress to be a child of its grandparent.
       items[curr] = items[items[curr]]
       curr = items[curr]
 
@@ -47,7 +46,6 @@ class UnionFind
 
     curr
   end
-
 
   def connected?(x, y)
     find(x) == find(y)
