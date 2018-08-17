@@ -11,7 +11,7 @@ module Dijkstra
       # 2. Add the outgoing edges from s to our min-heap.
       aa = ActiveSupport::HashWithIndifferentAccess.new
 
-      h = Heap.new
+      h = MinHeap.new
       h.add(0, source)
 
       while xx.size != vv.size
@@ -61,7 +61,7 @@ module Dijkstra
 
       aa = ActiveSupport::HashWithIndifferentAccess.new
 
-      h = Heap.new
+      h = MinHeap.new
       h.add(0, source)
 
       while xx.size != vv.size
