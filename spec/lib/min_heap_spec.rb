@@ -1,17 +1,17 @@
-RSpec.describe Heap do
+RSpec.describe MinHeap do
   context 'normal heap operations' do
     it 'should correctly keep track of size' do
-      h = Heap.new
+      h = MinHeap.new
       expect(h.size).to eq 0
 
       (0..25).each do |i|
-        h.add(i, i - 'a'.ord)
+        h.add(i, i + 'a'.ord)
         expect(h.size).to eq(i + 1)
       end
     end
 
     it 'should correctly extract min' do
-      h = Heap.new
+      h = MinHeap.new
 
       (1..1000).to_a.shuffle.each do |i|
         h.add(i, i)
@@ -27,7 +27,7 @@ RSpec.describe Heap do
     end
 
     it 'should correctly decrease_key' do
-      h = Heap.new
+      h = MinHeap.new
 
       # Add everything with random keys.
       (1..1000).to_a.shuffle.each do |i|
@@ -50,7 +50,7 @@ RSpec.describe Heap do
     end
 
     it 'should delete correctly' do
-      h = Heap.new
+      h = MinHeap.new
       n = 1000
 
       # Add everything with index keys.
@@ -66,7 +66,7 @@ RSpec.describe Heap do
         expect(k).to eq(i)
         expect(v).to eq(i)
         expect(h.delete(i)).to eq([i,i])
-        expect(h.size).to eq(n - i)
+        expect(h.size).to eq(n-i)
       end
     end
   end

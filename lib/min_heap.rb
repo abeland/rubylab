@@ -1,4 +1,4 @@
-class Heap
+class MinHeap
   DEFAULT_SIZE = 16
 
   def initialize
@@ -71,13 +71,6 @@ class Heap
     old_root
   end
 
-  def resize_if_necessary
-    return unless size == arr.size
-
-    # Arrays are mutable. Just double the size.
-    arr.size.times.each { |_| @arr << nil }
-  end
-
   def add(key, value)
     resize_if_necessary()
 
@@ -133,6 +126,13 @@ class Heap
   private
 
   attr_reader :arr, :v_to_i
+
+  def resize_if_necessary
+    return unless size == arr.size
+
+    # Arrays are mutable. Just double the size.
+    arr.size.times.each { |_| @arr << nil }
+  end
 
   def bubble_down(idx)
     node = arr[idx]
